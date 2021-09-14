@@ -1,0 +1,54 @@
+<div id="contents">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <div class="m-3">
+          <div class="d-flex align-items-center">
+            <div class="py-2 w-100 text-center">
+              <h2><%= @post.title %></h2>
+            </div>
+            <div class="py-2 flex-shrink-0">
+            <%= link_to post_path(@post.id), method: :delete do %>
+              <i class="bi bi-trash" style="font-size: xx-large"></i>
+            <% end %>
+            </div>
+          </div>
+          <%= attachment_image_tag @post, :image, format: 'jpeg' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <div class="reaction-container">
+          <%= link_to post_favorites_path(@post.id), method: :post, class: "btn"  do %>
+            <i
+              class="bi bi-hand-thumbs-up mx-3"
+              style="font-size: xx-large"
+            >
+            </i>
+            <span class="badge bg-secondary"><%= @favorites_count %></span>
+          <% end %>
+          <i
+            class="bi bi-chat-left-text mx-3"
+            style="font-size: xx-large; cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#commentModal"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <div class="text-center">
+          <h4><%= @post.description %></h4>
+          <%= link_to root_path do %>
+            <i class="bi bi-arrow-left" style="font-size: xx-large"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "layouts/comment_modal" %>
+<%= render partial: "layouts/create_modal" %>

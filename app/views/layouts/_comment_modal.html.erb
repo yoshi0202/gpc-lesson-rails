@@ -1,0 +1,54 @@
+<!-- コメントモーダル -->
+<div
+  class="modal fade"
+  id="commentModal"
+  tabindex="-1"
+  aria-labelledby="commentModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <div class="mx-4"></div>
+        <h5 class="modal-title" id="exampleModalLabel">コメント</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style="margin: 0"
+        ></button>
+      </div>
+      <%= form_with model: @new_comment, url: post_comments_path(@post.id), local: true do |f| %>
+      <div class="modal-body">
+        <p class="lead">投稿者コメント</p>
+        <div class="owner-comment p-2">
+          <%= @post.description %>
+          <hr />
+        </div>
+        <p>投稿されたコメント</p>
+        <div class="other-comment p-2">
+          <ul>
+            <% @post.comments.each do |comment| %>
+            <li><%= comment.detail %></li>
+            <% end %>
+          </ul>
+        </div>
+        <label for="comment" class="form-label">コメントを追加</label>
+        <%= f.text_field :detail, class: "form-control", placeholder: "文字を入力" %>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          キャンセル
+        </button>
+        <%= f.submit :title, class: "btn btn-primary", value: "投稿" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- コメントモーダルここまで -->

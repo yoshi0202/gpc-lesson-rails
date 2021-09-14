@@ -1,0 +1,51 @@
+<!-- 作成モーダル -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <div class="mx-4"></div>
+        <h5 class="modal-title" id="exampleModalLabel">新規投稿</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style="margin: 0"
+        ></button>
+      </div>
+      <%= form_with model: @new_post, url: posts_path, local: true do |f| %>
+      <div class="modal-body">
+        <label for="title" class="form-label">タイトル</label>
+        <div class="input-group mb-3">
+          <%= f.text_field :title, class: "form-control", placeholder: "文字を入力" %>
+        </div>
+        <label for="comment" class="form-label">コメント</label>
+        <div class="input-group mb-3">
+          <%= f.text_area :description, class: "form-control", placeholder: "文字を入力" %>
+        </div>
+        <label for="image" class="form-label">画像</label>
+        <div class="input-group mb-3">
+          <%= f.attachment_field :image, class: "form-control" %>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          キャンセル
+        </button>
+        <%= f.submit :title, class: "btn btn-primary", value: "投稿" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- 作成モーダルここまで -->
