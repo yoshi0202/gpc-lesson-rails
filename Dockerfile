@@ -16,4 +16,6 @@ FROM vendor as development
 RUN rm -rf tmp/pids/*
 CMD ["rails", "s", "-b", "0.0.0.0"]
 
-FROM vendor as production
+FROM vendor as deploy
+RUN rm -rf tmp/pids/*
+CMD ["rails", "s", "-b", "0.0.0.0"]
