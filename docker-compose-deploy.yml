@@ -6,6 +6,7 @@ services:
       target: deploy
     ports:
       - "3000:3000"
+    restart: always
   nginx:
     image: nginx:latest
     ports:
@@ -14,3 +15,4 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - rails
+    restart: always
