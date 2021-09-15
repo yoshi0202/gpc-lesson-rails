@@ -18,4 +18,5 @@ CMD ["rails", "s", "-b", "0.0.0.0"]
 
 FROM vendor as deploy
 RUN rm -rf tmp/pids/*
+RUN rais db:migrate
 CMD ["rails", "s", "-b", "0.0.0.0"]
