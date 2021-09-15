@@ -1,8 +1,15 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    @comment.save
-    redirect_to post_path(params[:post_id])
+    if @comment.save
+      redirect_to post_path(params[:post_id])
+      return
+    end
+    @new_post = Post.new
+    @new_comment = Comment.new
+    @post = Post.find(params[:post_id])
+    @favorites_count = @post.favorites.size
+    render 'posts/show' 
   end
 
   private

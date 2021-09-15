@@ -65,3 +65,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 # ImageMagick
 gem "refile-mini_magick"
+# i18n
+gem 'rails-i18n'

@@ -1,8 +1,13 @@
 class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to root_path
+    if @post.save
+      redirect_to root_path
+      return
+    end
+    @new_post = Post.new
+    @posts = Post.all
+    render 'home/index'
   end
 
   def show
