@@ -33,9 +33,8 @@ jobs:
       run: |
         echo "$SSH_KEY" >> ssh_key && chmod 600 ssh_key
         ssh -o StrictHostKeyChecking=no -i ssh_key ubuntu@$HOST 'cd gpc-lesson-rails \
-        && docker-compose pull \
-        && docker-compose up -d'
+        && docker-compose -f docker-compose-deploy.yml pull \
+        && docker-compose -f docker-compose-deploy.yml up -d'
 
-    # ssh debug settings
     # - name: Setup tmate session
     #   uses: mxschmitt/action-tmate@v3
