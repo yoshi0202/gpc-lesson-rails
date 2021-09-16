@@ -7,4 +7,4 @@ jobs:
       - uses: actions/checkout@v2
       - run: git status
       - run: git branch
-      - run: docker-compose --version
+      - run: docker build --target deploy -t gpc-lesson-community-site_rails:latest .
