@@ -33,8 +33,8 @@ jobs:
       run: |
         echo "$SSH_KEY" >> ssh_key && chmod 600 ssh_key
         ssh -o StrictHostKeyChecking=no -i ssh_key ubuntu@$HOST 'cd gpc-lesson-rails \
-        && echo "$ECR_REGISTRY" >> hoge.txt \
         && aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY} \
+        && docker-compose pull \
         && docker-compose up -d'
 
     # - name: Setup tmate session
