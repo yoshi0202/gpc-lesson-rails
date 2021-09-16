@@ -30,5 +30,6 @@ jobs:
         SSH_KEY: ${{ secrets.SSH_KEY }}
         HOST: ${{ secrets.DEPLOY_HOST }}
       run: |
-        echo $SSH_KEY >> ~/.ssh/id_rsa
-        ssh ubuntu@$HOST
+        echo $SSH_KEY >> ssh_key
+        chmod 600 ssh_key
+        ssh -i ssh_key ubuntu@$HOST
