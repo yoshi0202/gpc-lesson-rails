@@ -29,10 +29,13 @@ jobs:
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
         HOST: ${{ secrets.DEPLOY_HOST }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        echo $SSH_KEY >> ssh_key
-        chmod 600 ssh_key
+        echo "$SSH_KEY" >> ssh_key && chmod 600 ssh_key
+        ssh -o StrictHostKeyChecking=no -i ssh_key ubuntu@$HOST 'cd gpc-lesson-rails \
+        && aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $ECR_REGISTRY \
+        && docker-compose pull \
+        && docker-compose up -d'
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-        # ssh -i ssh_key ubuntu@$HOST
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
