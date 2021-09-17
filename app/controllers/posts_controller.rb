@@ -10,6 +10,19 @@ class PostsController < ApplicationController
     render 'home/index'
   end
 
+  def update
+    @old_post = Post.find(params[:id])
+    if @old_post.update(post_params)
+      redirect_to post_path params[:id]
+      return
+    end
+    @post = Post.find(params[:id])
+    @new_post = Post.new
+    @new_comment = Comment.new
+    @favorites_count = @post.favorites.size
+    render 'posts/show'
+  end
+
   def show
     @new_post = Post.new
     @new_comment = Comment.new

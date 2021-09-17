@@ -1,5 +1,8 @@
 name: ci
-on: push
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,3 +27,17 @@ jobs:
       run: |
         docker build --target deploy -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+    - name: Image Deploy
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        HOST: ${{ secrets.DEPLOY_HOST }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        echo "$SSH_KEY" >> ssh_key && chmod 600 ssh_key
+        ssh -o StrictHostKeyChecking=no -i ssh_key ubuntu@$HOST 'cd gpc-lesson-rails \
+        && docker-compose -f docker-compose-deploy.yml pull \
+        && docker-compose -f docker-compose-deploy.yml up -d'
+
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
