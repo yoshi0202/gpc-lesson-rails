@@ -9,6 +9,12 @@
               <h2><%= @post.title %></h2>
             </div>
             <div class="py-2 flex-shrink-0">
+            <i
+              class="bi bi-pencil-square"
+              style="font-size: xx-large; cursor: pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#updateModal"
+            ></i>
             <%= link_to post_path(@post.id), method: :delete do %>
               <i class="bi bi-trash" style="font-size: xx-large"></i>
             <% end %>
@@ -53,3 +59,4 @@
 
 <%= render partial: "layouts/comment_modal" %>
 <%= render partial: "layouts/create_modal" %>
+<%= render partial: "layouts/update_modal" %>

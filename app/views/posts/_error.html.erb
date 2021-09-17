@@ -13,3 +13,18 @@
     </div>
   </div>
 <% end %>
+<% if @old_post.present? && @old_post.errors.any? %>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-danger">
+        <ul class="mb-0">
+          <% @old_post.errors.full_messages.each do |e| %>
+          <li><%= e %></li>
+          <% end %>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
