@@ -2,11 +2,12 @@
   <%= render partial: "home/error" %>
   <div class="container">
     <div class="row">
-      <% @posts.each do |post| %>
+      <%# <% @posts.each do |post| %>
+      <% if @posts.present? %>
         <div class="col-4">
           <div class="my-2">
-            <%= link_to post_path post.id do %>
-              <%= attachment_image_tag post, :image, format: 'jpeg' %>
+            <%= link_to post_path @posts[0].id do %>
+              <%= attachment_image_tag @posts[0], :image, format: 'jpeg' %>
             <% end %>
           </div>
         </div>
